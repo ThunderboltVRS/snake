@@ -1,0 +1,52 @@
+:root {
+    --head-radius: 10px;
+  }
+
+.snake {
+    background-color: green;
+    /* animation-name: example;
+    animation-duration: 0.01s; */
+}
+
+.food {
+    background-image: url("../svg/red-apple.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.tile {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.table {
+    border: 5px solid black;
+    border-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.head-right {
+    border-radius: 0px var(--head-radius) var(--head-radius) 0px;
+}
+
+.head-left {
+    border-radius: var(--head-radius) 0px 0px var(--head-radius);
+}
+
+.head-up {
+    border-radius: var(--head-radius) var(--head-radius) 0px 0px;
+}
+
+.head-down {
+    border-radius: 0px 0px var(--head-radius) var(--head-radius);
+}
+
+.tail {
+    opacity: 0.8;
+
+}
+
+/* @keyframes example {
+    from {background-color: white;}
+    to {background-color: green;}
+  } */
