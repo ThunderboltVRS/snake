@@ -22,7 +22,7 @@
 .table {
     border: 5px solid black;
     border-spacing: 1px;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    box-shadow: 0 9px 20px 0 rgba(0,0,0,0.4);
 }
 
 .head-right {

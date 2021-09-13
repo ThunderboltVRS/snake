@@ -6,19 +6,17 @@
 (defn snake-classes [item head tail]
   (let [direction @(re-frame/subscribe [::subs/direction])]
     (cond
-      (= item head) (str "snake head-" (name direction)) 
+      (= item head) (str "snake head-" (name direction))
       (= item tail) "snake tail"
-      :else "snake"))
-  )
+      :else "snake")))
 
 (defn table-item [item]
   (let [snake @(re-frame/subscribe [::subs/snake])
         food @(re-frame/subscribe [::subs/food])
         is-snake? (some #(= item %) snake)
-        is-food? (= item food)
-        ]
+        is-food? (= item food)]
     ^{:key (str (first item) (second item))}
-    (cond 
+    (cond
       is-snake? [:td {:class (str "tile " (snake-classes item (first snake) (last snake)))}]
       is-food? [:td {:class "tile food"}]
       :else [:td {:class "tile"}])))
@@ -36,11 +34,14 @@
 
 (defn main-panel []
   (let [board @(re-frame/subscribe [::subs/board])
-        state @(re-frame/subscribe [::subs/state])]
+        state @(re-frame/subscribe [::subs/state])
+        score @(re-frame/subscribe [::subs/score])]
     [:div
      [:<>
-     [:h1
-      (state-to-string state)]
+      [:h1
+       (state-to-string state)]
       [:table.table
        [:tbody
-        (doall (map table-row board))]]]]))
+        (doall (map table-row board))]]
+      [:h2
+       (str "Score: " score)]]]))

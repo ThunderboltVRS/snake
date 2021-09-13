@@ -31,3 +31,8 @@
  ::snake
  (fn [db]
    (:snake db)))
+
+(re-frame/reg-sub
+ ::score
+ (fn [db]
+   (count (:snake db))))
