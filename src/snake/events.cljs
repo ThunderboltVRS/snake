@@ -4,21 +4,19 @@
    [snake.db :as db]
    [clojure.set :as s]))
 
-(def directions {:up [-1 0]
+(def direction-vector {:up [-1 0]
                  :down [1 0]
                  :left [0 -1]
                  :right [0 1]})
 
-(defn add-vector [left right]
-  (let [x (+ (first left) (first right))
-        y (+ (second left) (second right))]
-    [x y]))
+(defn add-vector [[x1 y1] [x2 y2]]
+    [(+ x1 x2) (+ y1 y2)])
 
 (def opposites [#{:left :right}
                 #{:up :down}])
 
 (defn move-in-direction [head direction]
-  (add-vector head (direction directions)))
+  (add-vector head (direction direction-vector)))
 
 (re-frame/reg-event-db
  ::initialize-db
@@ -46,27 +44,16 @@
                       :playing :paused
                       (:state db)))))
 
-(re-frame.core/reg-event-db
- :populate-food
- (fn [db [_ _]]
-   (assoc db :food [3 9])))
+(defn eating-self? [[head tail]]
+    (some #(= % head) tail))
 
-(defn eating-self? [snake]
-  (let [head (first snake)
-        tail (rest snake)]
-    (some #(= % head) tail)))
-
-(defn out-of-bounds? [head board-size]
-  (let [x (first head)
-        y (second head)]
+(defn out-of-bounds? [[x y] board-size]
     (cond
       (> x board-size) true
       (< x 1) true
       (> y board-size) true
       (< y 1) true
-      :else false)))
-
-
+      :else false))
 
 (re-frame.core/reg-event-db
  :tick

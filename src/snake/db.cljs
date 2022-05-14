@@ -15,8 +15,8 @@
 
 (def default-db
   (let [board-size 18
-        rows (range 1 (+ 1 board-size))
-        columns (range 1 (+ 1 board-size))
+        rows (range 1 (inc board-size))
+        columns (range 1 (inc board-size))
         board (->> rows 
                    (map #(places % columns)))
         snake '([5 6] [5 5] [5 4] [5 3] [5 2])]
